@@ -324,7 +324,7 @@ class Repo(common.Common, unittest.TestCase):
         # .git parent. So if you change this to use a fixed directory (say,
         # when debugging problems), use /tmp/_test rather than ./_test .
         self.testdir = tempfile.mkdtemp()
-        if VERBOSE: print("testdir: %s" % (self.testdir,))
+        print("testdir: %s" % (self.testdir,))
         if os.path.exists(self.testdir):
             shutil.rmtree(self.testdir)
 
@@ -361,6 +361,7 @@ class Repo(common.Common, unittest.TestCase):
         self.assertEqual(v, "0+untagged.1.g%s" % full[:7])
 
         out = self.python("versioneer.py", "setup").splitlines()
+        print(out)
         self.assertEqual(out[0], "creating src/demo/_version.py")
         filename = os.path.join('src', 'demo', '__init__.py')
         if script_only:
