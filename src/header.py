@@ -82,7 +82,7 @@ def get_config_from_root(root):
     cfg.VCS = VCS
     cfg.style = get(parser, "style") or ""
     cfg.versionfile_source = get(parser, "versionfile_source")
-    if os.sep != '/' and '/' in cfg.versionfile_source:
+    if os.sep != '/' and '/' in (cfg.versionfile_source or ''):
 		cfg.cfg.versionfile_source.replace('/', os.sep)
     cfg.versionfile_build = get(parser, "versionfile_build")
     cfg.tag_prefix = get(parser, "tag_prefix")
