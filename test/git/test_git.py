@@ -360,16 +360,20 @@ class Repo(common.Common, unittest.TestCase):
                         workdir=self.testdir)
         self.assertEqual(v, "0+untagged.1.g%s" % full[:7])
 
+        init_filename = os.path.join('src', 'demo', '__init__.py')
+        ver_filename = os.path.join('src', 'demo', '_version.py')
+
         out = self.python("versioneer.py", "setup").splitlines()
         print(out)
-        self.assertEqual(out[0], "creating src/demo/_version.py")
-        filename = os.path.join('src', 'demo', '__init__.py')
+        self.assertEqual(out[0], "creating %s" % ver_filename)
         if script_only:
-            self.assertEqual(out[1], " %s doesn't exist, ok" % filename)
+            self.assertEqual(out[1], " %s doesn't exist, ok" % init_filename)
         else:
-            self.assertEqual(out[1], " appending to %s" % filename)
+            self.assertEqual(out[1], " appending to %s" % init_filename)
         self.assertEqual(out[2], " appending 'versioneer.py' to MANIFEST.in")
-        self.assertEqual(out[3], " appending versionfile_source ('src/demo/_version.py') to MANIFEST.in")
+        self.assertEqual(out[3],
+                         " appending versionfile_source ('%') to MANIFEST.in"
+                         % ver_filename)
 
         # Many folks have a ~/.gitignore with ignores .pyc files, but if they
         # don't, it will show up in the status here. Ignore it.
