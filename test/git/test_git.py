@@ -362,10 +362,11 @@ class Repo(common.Common, unittest.TestCase):
 
         out = self.python("versioneer.py", "setup").splitlines()
         self.assertEqual(out[0], "creating src/demo/_version.py")
+        filename = os.path.join('src', 'demo', '__init__.py')
         if script_only:
-            self.assertEqual(out[1], " src/demo/__init__.py doesn't exist, ok")
+            self.assertEqual(out[1], " %s doesn't exist, ok" % filename)
         else:
-            self.assertEqual(out[1], " appending to src/demo/__init__.py")
+            self.assertEqual(out[1], " appending to %s" % filename)
         self.assertEqual(out[2], " appending 'versioneer.py' to MANIFEST.in")
         self.assertEqual(out[3], " appending versionfile_source ('src/demo/_version.py') to MANIFEST.in")
 
