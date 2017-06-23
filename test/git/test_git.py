@@ -269,7 +269,7 @@ class RenderPieces(unittest.TestCase):
                                  (pieces, key, got[key], expected[key]))
 
 
-VERBOSE = False
+VERBOSE = True
 
 class Repo(common.Common, unittest.TestCase):
 
